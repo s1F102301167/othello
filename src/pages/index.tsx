@@ -26,22 +26,30 @@ const Home = () => {
   const clickHandler = (x: number, y: number) => {
     console.log(x, y);
     const newBoard = structuredClone(board);
-    for (const direction of directions) {
-      for (let i = 0; i < 8; i++) {
-        if (
-          board[y + direction[0]] !== undefined &&
-          board[y][x] === 0 &&
-          board[y + direction[0]][x + direction[1]] === 2 / turnColor &&
-          board[y + direction[0] * i][x + direction[1] * i] !== 0 &&
-          board[y + direction[0] * i][x + direction[1] * i] === turnColor
-        ) {
-          newBoard[y][x] = turnColor;
-          newBoard[y + direction[0]*i][x + direction[1]*i] = turnColor;
-          setTurnColor(2 / turnColor);
-          setBoard(newBoard);
-        } else {
-          setTurnColor(2 / turnColor);
-          setBoard(newBoard);
+    if (newBoard[y][x] === 0) {
+      for (const direction of directions) {
+        for (let i = 1; i < 8; i++) {
+          if (newBoard[y + direction[0] * i] === undefined) {
+            break;
+          } else {
+            if (newBoard[y + direction[0] * i][x + direction[1] * i] === undefined) {
+              break;
+            } else if (newBoard[y + direction[0]][x + direction[1]] === turnColor) {
+              break;
+            } else if (newBoard[y + direction[0] * i][x + direction[1] * i] === 0) {
+              break;
+            } else if (
+              newBoard[y + direction[0] * i][x + direction[1] * i] === turnColor &&
+              i > 1
+            ) {
+              for (let j = i; j > 0; j--) {
+                newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
+              }
+              newBoard[y][x] = turnColor;
+              setTurnColor(2 / turnColor);
+              setBoard(newBoard);
+            }
+          }
         }
       }
     }
