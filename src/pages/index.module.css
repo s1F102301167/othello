@@ -31,3 +31,10 @@
   background-color: white;
   border-radius: 50%;
 }
+
+.circleStyle {
+  width: 30px;
+  height: 30px;
+  background-color: deeppink;
+  border-radius: 50%
+}

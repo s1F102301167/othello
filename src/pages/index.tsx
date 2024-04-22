@@ -11,7 +11,7 @@ const Home = () => {
     [0, 0, 0, 2, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 3],
   ]);
   const directions = [
     [0, 1],
@@ -54,8 +54,15 @@ const Home = () => {
       }
     }
   };
+  const point = (a: number) => board.flat().filter((b) => b === a).length;
   return (
     <div className={styles.container}>
+      <>
+        brack{point(1)}
+        /white{point(2)}
+        <br />
+        {['', 'brackturn', 'whiteturn'][turnColor]}
+      </>
       <div className={styles.boardStyle}>
         {board.map((row, y) =>
           row.map((color, x) => (
@@ -63,7 +70,11 @@ const Home = () => {
               {color !== 0 && (
                 <div
                   className={styles.stoneStyle}
-                  style={{ background: color === 1 ? '#000' : '#fff' }}
+                  style={{
+                    background: color === 1 ? '#000' : color === 2 ? '#fff' : '#ff21ec',
+                    width: color === 3 ? '20px' : '56px',
+                    height: color === 3 ? '20px' : '56px',
+                  }}
                 />
               )}
             </div>
