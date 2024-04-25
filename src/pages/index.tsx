@@ -11,7 +11,7 @@ const Home = () => {
     [0, 0, 0, 2, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 0, 0],
   ]);
   const directions = [
     [0, 1],
@@ -26,9 +26,11 @@ const Home = () => {
   const clickHandler = (x: number, y: number) => {
     const newBoard = structuredClone(board);
     if (newBoard[y][x] === 0) {
-      newBoard[y][x] === turnColor
-      setBoard(newBoard);
-      setTurnColor(3 - turnColor);
+      if (newBoard[y + 1] !== undefined && newBoard[y + 1][x] === 3 - turnColor) {
+        newBoard[y][x] = turnColor;
+        setBoard(newBoard);
+        setTurnColor(3 - turnColor);
+      }
     }
   };
   return (
