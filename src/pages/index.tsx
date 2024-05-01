@@ -35,12 +35,17 @@ const Home = () => {
               break;
             } else if (newBoard[y + direction[0] * i][x] === turnColor) {
               break;
-            } else {
-              for (let j = i; j >= 0; j--) {
-                newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
+            } else if (newBoard[y + direction[0] * i][x] === 3 - turnColor) {
+              if (i >= 1) {
+                for (let j = i; j >= 0; j--) {
+                  newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
+                }
+                setBoard(newBoard);
+                setTurnColor(3 - turnColor);
               }
-              setBoard(newBoard);
-              setTurnColor(3 - turnColor);
+              break;
+            } else if (newBoard[y + direction[0] * i][x + direction[1] * i] === 3 - turnColor) {
+              continue;
             }
           }
         }
