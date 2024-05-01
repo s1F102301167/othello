@@ -28,25 +28,21 @@ const Home = () => {
     if (newBoard[y][x] === 0) {
       for (const direction of directions) {
         for (let i = 1; i < 8; i++) {
-          if (newBoard[y + i][x] === undefined) {
+          if (newBoard[y + direction[0] * i] === undefined) {
             break;
           } else {
-            if (newBoard[y + direction[0] * i][x + direction[1] * i] === 0) {
-              break;
+            if (newBoard[y + direction[0] * i][x + direction[1] * i] === 3 - turnColor) {
+              continue;
             } else if (newBoard[y + direction[0] * i][x + direction[1] * i] === turnColor) {
-              break;
-            } else if (newBoard[y + direction[0] * i][x + direction[1] * i] === 3 - turnColor) {
-              if (i >= 1) {
-                for (let j = i; j >= 0; j--) {
-                  newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
-                }
+              for (let j = i - 1; j > 0; j--) {
+                newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
                 newBoard[y][x] = turnColor;
                 setBoard(newBoard);
                 setTurnColor(3 - turnColor);
               }
               break;
-            } else if (newBoard[y + direction[0] * i][x + direction[1] * i] === 3 - turnColor) {
-              continue;
+            } else {
+              break;
             }
           }
         }
