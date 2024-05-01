@@ -7,12 +7,16 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 2, 0, 0, 0],
     [0, 0, 0, 2, 1, 0, 0, 0],
+    [0, 0, 0, 1, 2, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
   ]);
+  const turnText = turnColor === 1 ? '黒' : '白';
+  const blackCount = board.flat().filter((color) => color === 1).length;
+  const whiteCount = board.flat().filter((color) => color === 2).length;
+
   const directions = [
     [0, 1],
     [-1, 1],
@@ -28,29 +32,16 @@ const Home = () => {
     if (newBoard[y][x] === 0) {
       for (const direction of directions) {
         for (let i = 1; i < 8; i++) {
-          if (newBoard[y + direction[0] * i] === undefined) {
-            break;
-          } else {
-            if (newBoard[y + direction[0] * i][x + direction[1] * i] === 3 - turnColor) {
-              continue;
-            } else if (newBoard[y + direction[0] * i][x + direction[1] * i] === turnColor) {
-              for (let j = i - 1; j > 0; j--) {
-                newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
-                newBoard[y][x] = turnColor;
-                setBoard(newBoard);
-                setTurnColor(3 - turnColor);
-              }
-              break;
-            } else {
-              break;
-            }
-          }
+          
         }
       }
     }
   };
   return (
     <div className={styles.container}>
+      <div>ターン: {turnText}</div>
+      <div>黒の石: {blackCount}</div>
+      <div>白の石: {whiteCount}</div>
       <div className={styles.boardStyle}>
         {board.map((row, y) =>
           row.map((color, x) => (
