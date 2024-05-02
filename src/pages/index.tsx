@@ -32,12 +32,9 @@ const Home = () => {
     if (newBoard[y][x] === 0) {
       for (const direction of directions) {
         for (let i = 1; i < 8; i++) {
-          while (
-            y + direction[0] * i >= 0 &&
-            y + direction[0] * i < 8 &&
-            x + direction[1] * i >= 0 &&
-            x + direction[1] * i < 8
-          ) {
+          if (y + direction[0] === undefined || x + direction[1] === undefined) {
+            break;
+          } else {
             if (board[y + direction[0]][x + direction[1]] === 0) {
               break;
             } else if (board[y + direction[0]][x + direction[1]] === turnColor) {
@@ -49,11 +46,12 @@ const Home = () => {
                 for (let j = i; j >= 0; j--) {
                   newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
                 }
-                setTurnColor(3 - turnColor);
               }
             }
           }
         }
+        setBoard(newBoard);
+        setTurnColor(3 - turnColor);
       }
     }
   };
