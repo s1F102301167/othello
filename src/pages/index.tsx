@@ -32,7 +32,12 @@ const Home = () => {
     if (newBoard[y][x] === 0) {
       for (const direction of directions) {
         for (let i = 1; i < 8; i++) {
-          if (y + direction[0] === undefined || x + direction[1] === undefined) {
+          if (
+            y + direction[0] * i < 0 ||
+            y + direction[0] * i >= 8 ||
+            x + direction[1] * i < 0 ||
+            x + direction[1] * i >= 8
+          ) {
             break;
           } else {
             if (board[y + direction[0]][x + direction[1]] === 0) {
