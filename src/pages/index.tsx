@@ -29,7 +29,7 @@ const Home = () => {
   ];
   const clickHandler = (x: number, y: number) => {
     const newBoard = structuredClone(board);
-    if (newBoard[y][x] === 0 || newBoard[y][x] === 3) {
+    if (newBoard[y][x] === 3) {
       for (const direction of directions) {
         for (let i = 1; i < 8; i++) {
           if (
@@ -82,14 +82,17 @@ const Home = () => {
               ) {
                 break;
               } else {
-                if (board[c + direction[0]][d + direction[1]] === 0) {
+                if (newBoard[c + direction[0]][d + direction[1]] === 0) {
                   break;
-                } else if (board[c + direction[0]][d + direction[1]] === turnColor) {
+                } else if (newBoard[c + direction[0]][d + direction[1]] === 3 - turnColor) {
                   break;
-                } else if (board[c + direction[0]][d + direction[1]] === 3 - turnColor) {
-                  if (board[c + direction[0] * i][d + direction[1] * i] === 0) {
+                } else if (newBoard[c + direction[0]][d + direction[1]] === turnColor) {
+                  if (newBoard[c + direction[0] * i][d + direction[1] * i] === 0) {
                     break;
-                  } else if (board[c + direction[0] * i][d + direction[1] * i] === turnColor) {
+                  } else if (
+                    newBoard[c + direction[0] * i][d + direction[1] * i] ===
+                    3 - turnColor
+                  ) {
                     newBoard[c][d] = 3;
                   }
                 }
