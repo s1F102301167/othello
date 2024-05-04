@@ -32,25 +32,18 @@
   border-radius: 50%;
 }
 
-.circleStyle {
-  width: 30px;
-  height: 30px;
-  background-color: deeppink;
-  border-radius: 50%
-}
-
-.scoreboard{
-  background: linear-gradient(135deg, #ffffff, #e0e0e0); /* グラデーション */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* 影 */
+.scoreboard {
   text-align: center;
+  background: linear-gradient(135deg, #fff, #e0e0e0); /* グラデーション */
+  box-shadow: 0 10px 20px rgb(0 0 0 / 10%); /* 影 */
 }
 
-.turn{
+.turn {
   font-size: 24px;
   font-weight: bold;
 }
 
-.score{
+.score {
   font-size: 20px;
   font-weight: bold;
 }
