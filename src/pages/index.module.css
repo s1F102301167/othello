@@ -26,10 +26,25 @@
 }
 
 .stoneStyle {
+  border-radius: 50%;
+}
+
+.blackStone {
   width: 56px;
   height: 56px;
-  background-color: white;
-  border-radius: 50%;
+  background: #000;
+}
+
+.whiteStone {
+  width: 56px;
+  height: 56px;
+  background: #fff;
+}
+
+.pinkStone {
+  width: 20px;
+  height: 20px;
+  background: #FFC0CB;
 }
 
 .scoreboard {

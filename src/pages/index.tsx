@@ -119,12 +119,7 @@ const Home = () => {
           row.map((color, x) => (
             <div className={styles.cellStyle} key={`${x}-${y}`} onClick={() => clickHandler(x, y)}>
               {color !== 0 && (
-                <div
-                  className={styles.stoneStyle}
-                  style={{
-                    background: color === 1 ? '#000' : color === 2 ? '#fff' : '#FFC0CB',
-                  }}
-                />
+                <div className={`${styles.stoneStyle} ${color === 1 ? styles.blackStone : color === 2 ? styles.whiteStone : styles.pinkStone}`} />
               )}
             </div>
           )),
