@@ -62,9 +62,12 @@ const Home = () => {
   };
   return (
     <div className={styles.container}>
-      <div className={styles.turn}>ターン: {turnText}</div>
-      <div className={styles.score}>黒の石: {blackCount}</div>
-      <div className={styles.score}>白の石: {whiteCount}</div>
+      <div className={styles.scoreboard}>
+        <div className={styles.turn}>ターン: {turnText}</div>
+        <div className={styles.score}>
+          黒の石: {blackCount} | 白の石: {whiteCount}
+        </div>
+      </div>
       <div className={styles.boardStyle}>
         {board.map((row, y) =>
           row.map((color, x) => (
