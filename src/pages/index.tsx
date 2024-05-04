@@ -29,6 +29,7 @@ const Home = () => {
   ];
   const clickHandler = (x: number, y: number) => {
     const newBoard = structuredClone(board);
+    //ひっくり返す動作
     if (newBoard[y][x] === 3) {
       for (const direction of directions) {
         for (let i = 1; i < 8; i++) {
@@ -60,6 +61,7 @@ const Home = () => {
         }
       }
     }
+    //候補地の動作
     for (let a = 0; a < 8; a++) {
       for (let b = 0; b < 8; b++) {
         if (board[a][b] === 3) {
@@ -67,7 +69,7 @@ const Home = () => {
         }
       }
     }
-    newBoard[y][x] = turnColor;
+    newBoard[y][x] = turnColor;//この動作をどうにかしないとパスができない
     setTurnColor(3 - turnColor);
     for (let c = 0; c < 8; c++) {
       for (let d = 0; d < 8; d++) {
@@ -103,6 +105,42 @@ const Home = () => {
       }
     }
     setBoard(newBoard);
+    //パスの動作(上記のif(newBoard[y][x]===3のelseにこれを書けるのが理想))
+    // for (let e = 0; e < 8; e++) {
+    //   for (let f = 0; f < 8; f++) {
+    //     if (newBoard[e][f] !== 3) {
+    //       setTurnColor(3 - turnColor);
+    //       for (const direction of directions) {
+    //         for (let i = 1; i < 8; i++) {
+    //           if (
+    //             e + direction[0] * i < 0 ||
+    //             e + direction[0] * i >= 8 ||
+    //             f + direction[1] * i < 0 ||
+    //             f + direction[1] * i >= 8
+    //           ) {
+    //             break;
+    //           } else {
+    //             if (newBoard[e + direction[0]][f + direction[1]] === 0) {
+    //               break;
+    //             } else if (newBoard[e + direction[0]][f + direction[1]] === 3 - turnColor) {
+    //               break;
+    //             } else if (newBoard[e + direction[0]][f + direction[1]] === turnColor) {
+    //               if (newBoard[e + direction[0] * i][f + direction[1] * i] === 0) {
+    //                 break;
+    //               } else if (
+    //                 newBoard[e + direction[0] * i][f + direction[1] * i] ===
+    //                 3 - turnColor
+    //               ) {
+    //                 newBoard[e][f] = 3;
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // setBoard(newBoard);
   };
 
   return (
@@ -119,7 +157,9 @@ const Home = () => {
           row.map((color, x) => (
             <div className={styles.cellStyle} key={`${x}-${y}`} onClick={() => clickHandler(x, y)}>
               {color !== 0 && (
-                <div className={`${styles.stoneStyle} ${color === 1 ? styles.blackStone : color === 2 ? styles.whiteStone : styles.pinkStone}`} />
+                <div
+                  className={`${styles.stoneStyle} ${color === 1 ? styles.blackStone : color === 2 ? styles.whiteStone : styles.pinkStone}`}
+                />
               )}
             </div>
           )),
