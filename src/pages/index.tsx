@@ -14,7 +14,7 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0],
   ]);
   const turnText = turnColor === 1 ? '黒' : '白';
-  const blackCount = board.flat().filter((color) => color === 1).length;
+  const blackCount = board.flat().filter((color) => color === 1).length; //boardをコピーしてfilterメソッドでcolorが1のものを抽出し、lengthで数えている
   const whiteCount = board.flat().filter((color) => color === 2).length;
 
   const directions = [
@@ -62,9 +62,9 @@ const Home = () => {
   };
   return (
     <div className={styles.container}>
-      <div>ターン: {turnText}</div>
-      <div>黒の石: {blackCount}</div>
-      <div>白の石: {whiteCount}</div>
+      <div className={styles.turn}>ターン: {turnText}</div>
+      <div className={styles.score}>黒の石: {blackCount}</div>
+      <div className={styles.score}>白の石: {whiteCount}</div>
       <div className={styles.boardStyle}>
         {board.map((row, y) =>
           row.map((color, x) => (

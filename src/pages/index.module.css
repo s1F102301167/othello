@@ -38,3 +38,13 @@
   background-color: deeppink;
   border-radius: 50%
 }
+
+.turn {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.score {
+  font-size: 18px;
+  color: #000;
+}
