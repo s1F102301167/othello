@@ -54,48 +54,50 @@ const Home = () => {
               } else if (board[y + direction[0] * i][x + direction[1] * i] === turnColor) {
                 for (let j = i; j >= 0; j--) {
                   newBoard[y + direction[0] * j][x + direction[1] * j] = turnColor;
+                  newBoard[y][x] = turnColor;
+                  console.log(newBoard[y][x]);
+                  setTurnColor(3 - turnColor);
                 }
               }
             }
           }
         }
       }
-    }
-    //候補地の動作
-    for (let a = 0; a < 8; a++) {
-      for (let b = 0; b < 8; b++) {
-        if (board[a][b] === 3) {
-          newBoard[a][b] = 0;
+
+      //候補地の動作
+      for (let a = 0; a < 8; a++) {
+        for (let b = 0; b < 8; b++) {
+          if (newBoard[a][b] === 3) {
+            newBoard[a][b] = 0;
+          }
         }
       }
-    }
-    newBoard[y][x] = turnColor;//この動作をどうにかしないとパスができない
-    setTurnColor(3 - turnColor);
-    for (let c = 0; c < 8; c++) {
-      for (let d = 0; d < 8; d++) {
-        if (newBoard[c][d] === 0) {
-          for (const direction of directions) {
-            for (let i = 1; i < 8; i++) {
-              if (
-                c + direction[0] * i < 0 ||
-                c + direction[0] * i >= 8 ||
-                d + direction[1] * i < 0 ||
-                d + direction[1] * i >= 8
-              ) {
-                break;
-              } else {
-                if (newBoard[c + direction[0]][d + direction[1]] === 0) {
+      for (let c = 0; c < 8; c++) {
+        for (let d = 0; d < 8; d++) {
+          if (newBoard[c][d] === 0) {
+            for (const direction of directions) {
+              for (let i = 1; i < 8; i++) {
+                if (
+                  c + direction[0] * i < 0 ||
+                  c + direction[0] * i >= 8 ||
+                  d + direction[1] * i < 0 ||
+                  d + direction[1] * i >= 8
+                ) {
                   break;
-                } else if (newBoard[c + direction[0]][d + direction[1]] === 3 - turnColor) {
-                  break;
-                } else if (newBoard[c + direction[0]][d + direction[1]] === turnColor) {
-                  if (newBoard[c + direction[0] * i][d + direction[1] * i] === 0) {
+                } else {
+                  if (newBoard[c + direction[0]][d + direction[1]] === 0) {
                     break;
-                  } else if (
-                    newBoard[c + direction[0] * i][d + direction[1] * i] ===
-                    3 - turnColor
-                  ) {
-                    newBoard[c][d] = 3;
+                  } else if (newBoard[c + direction[0]][d + direction[1]] === 3 - turnColor) {
+                    break;
+                  } else if (newBoard[c + direction[0]][d + direction[1]] === turnColor) {
+                    if (newBoard[c + direction[0] * i][d + direction[1] * i] === 0) {
+                      break;
+                    } else if (
+                      newBoard[c + direction[0] * i][d + direction[1] * i] ===
+                      3 - turnColor
+                    ) {
+                      newBoard[c][d] = 3;
+                    }
                   }
                 }
               }
